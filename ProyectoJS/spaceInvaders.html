@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #Canvas {
+            background-image: url(img/background.png);
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="Canvas" width="480" height="320"></canvas>
+
+    <script>
+
+        let canvas = document.getElementById("Canvas");
+        let context = canvas.getContext("2d");
+
+
+        let ship = { x: canvas.width / 2, y: canvas.height - 50, width: 32, height: 42 };
+        let bullets = [];
+        let invaders = [];
+        let score = 0;
+        let isGameOver = false;
+        let timer = 2000;
+
+        let invaderImage = new Image();
+        invaderImage.src = "img/invader.png";
+
+        let shipImage = new Image();
+        shipImage.src = "img/mainChara.png";
+
+
+        let rightPressed = false;
+        let leftPressed = false;
+        let spacePressed = false;
+
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+
+        function keyDownHandler(e) {
+            if (e.key === "Right" || e.key === "ArrowRight") {
+                rightPressed = true;
+            } else if (e.key === "Left" || e.key === "ArrowLeft") {
+                leftPressed = true;
+            } else if (e.key === " ") {
+                spacePressed = true;
+            }
+        }
+
+        function keyUpHandler(e) {
+            if (e.key === "Right" || e.key === "ArrowRight") {
+                rightPressed = false;
+            } else if (e.key === "Left" || e.key === "ArrowLeft") {
+                leftPressed = false;
+            } else if (e.key === " ") {
+                spacePressed = false;
+            }
+        }
+
+
+        function checkCollision(obj1, obj2) {
+            return (
+                obj1.x < obj2.x + obj2.width &&
+                obj1.x + obj1.width > obj2.x &&
+                obj1.y < obj2.y + obj2.height &&
+                obj1.y + obj1.height > obj2.y
+            );
+        }
+
+
+        function drawShip() {
+            context.drawImage(shipImage, ship.x, ship.y, ship.width, ship.height);
+        }
+
+
+        function moveShip() {
+            if (rightPressed && ship.x < canvas.width - ship.width) {
+                ship.x += 5;
+            } else if (leftPressed && ship.x > 0) {
+                ship.x -= 5;
+            }
+        }
+
+
+        function drawInvaders() {
+            for (let i = 0; i < invaders.length; i++) {
+                let invader = invaders[i];
+                if (invader.status === 1) {
+                    context.drawImage(invaderImage, invader.x, invader.y, invader.width, invader.height);
+                }
+            }
+        }
+
+
+        function moveInvaders() {
+            for (let i = 0; i < invaders.length; i++) {
+                let invader = invaders[i];
+                if (invader.status === 1)
+                    invader.y += 1;
+            }
+        }
+
+
+
+        function drawBullets() {
+            for (let i = 0; i < bullets.length; i++) {
+                let bullet = bullets[i];
+                context.beginPath();
+                context.rect(bullet.x, bullet.y, bullet.width, bullet.height);
+                context.fillStyle = "yellow";
+                context.fill();
+                context.closePath();
+            }
+        }
+
+
+        function moveBullets() {
+            for (let i = 0; i < bullets.length; i++) {
+                let bullet = bullets[i];
+                bullet.y -= 5;
+
+
+                for (let j = 0; j < invaders.length; j++) {
+                    let invader = invaders[j];
+                    if (invader.status === 1 && checkCollision(bullet, invader)) {
+                        invader.status = 0;
+                        bullet.status = 0;
+                        score++;
+                    }
+                }
+
+                if (bullet.y < 0 || bullet.status === 0) {
+                    bullets.splice(i, 1);
+                }
+            }
+        }
+
+        function drawScore() {
+            context.font = "16px Arial";
+            context.fillStyle = "white";
+            context.fillText("Score: " + score, 8, 20);
+        }
+
+        function draw() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!isGameOver) {
+
+                drawShip();
+                drawInvaders();
+                drawBullets();
+                drawScore();
+                moveShip();
+                moveInvaders();
+                moveBullets();
+
+                for (let i = 0; i < invaders.length; i++) {
+                    let invader = invaders[i];
+                    if (invader.status === 1 && checkCollision(ship, invader)) {
+                        isGameOver = true;
+                    }
+                }
+                requestAnimationFrame(draw);
+            } else {
+                context.font = "30px Arial";
+                context.fillStyle = "white";
+                context.fillText("Game Over", canvas.width / 2 - 80, canvas.height / 2);
+            }
+        }
+
+
+        function shoot() {
+            bullets.push({ x: ship.x + ship.width / 2, y: ship.y, width: 4, height: 8, status: 1 });
+        }
+
+
+        function generateInvader() {
+            let invader = { x: Math.random() * (canvas.width - 32), y: 0, width: 32, height: 32, status: 1 };
+            invaders.push(invader);
+        }
+
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === " ") {
+                spacePressed = true;
+                shoot();
+            }
+        });
+
+        document.addEventListener("keyup", function (event) {
+            if (event.key === " ") {
+                spacePressed = false;
+            }
+        });
+
+
+        invaderImage.onload = function () {
+            shipImage.onload = function () {
+                setInterval(generateInvader, timer);
+                draw();
+            };
+
+            shipImage.src = "img/mainChara.png";
+        };
+
+        invaderImage.src = "img/invader.png";
+    </script>
+</body>
+
+</html>
