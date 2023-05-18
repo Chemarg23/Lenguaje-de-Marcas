@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <h1>Ejemplo js</h1>
+    <script>
+
+       let word, pos1,pos2;
+       word = prompt("Write a sentence")
+       pos1 = prompt("Introduce the first position");
+       pos2 = prompt("Introduce the second position");
+
+       if(!isNaN(pos1) && !isNaN(pos2)){
+        document.write(`The substring is: ${word.substring(pos1,pos2)}`)
+       }else{document.write("Incorrect positions")}
+       
+
+
+    </script>
+
+
+
+</body>
+
+</html>

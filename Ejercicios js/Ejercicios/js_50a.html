@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="border: 1px solid black;" id="div">
+        <p id="changer">Haz click para cambiar</p>
+    </div>
+    <button onclick="textChange()">Cambiar texto</button>
+    <button onclick="addText()">Añadir texto</button>
+    
+    <script>
+        function textChange(){
+            document.getElementById("changer").innerHTML="Texto cambiado";
+        }
+        function addText(){
+            document.getElementById("changer").innerHTML+=document.getElementById("changer").innerHTML="<br> Texto añadido ";
+        }
+    </script>
+
+</body>
+
+</html>

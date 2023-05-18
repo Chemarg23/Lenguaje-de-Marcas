@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejemplo de javascripst</h1>
+    <script>
+        let oracion = prompt("Escribre una frase");
+        let numLetras = oracion.split(" ");
+        document.write("Su frase tiene "+numLetras.length+" palabras")
+        for(var i=0;i<numLetras.length;i++){
+            document.write("</br>"+numLetras[i])
+        }
+    </script>
+</body>
+</html>

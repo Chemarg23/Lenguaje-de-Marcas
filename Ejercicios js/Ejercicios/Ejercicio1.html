@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <h1>Ejemplo js</h1>
+    <script>
+        let figura, numero, numero2;
+        figura = prompt("Introduzca la figura que desee").toLowerCase();
+        
+
+        if (figura === "rectangulo") {
+            numero = prompt("Ingrese la altura")
+            numero2 = prompt("Ingrese el ancho")
+
+            document.write(`El área del rectángulo es: ${numero * numero2} y su perímetro: ${numero * 2 + numero2 * 2} `)
+        } else if (figura === "cuadrado") {
+            numero = prompt("Ingrese la longitud de la arista");
+            document.write(`El área del rectángulo es: ${numero * numero} y su perímetro: ${numero * 4} `)
+        } else if (figura === "circulo") {
+            numero = prompt("Ingrese el radio");
+            document.write(`El área del rectángulo es: ${numero*numero*3.14} y su perímetro: ${2*3.14*numero} `)
+        } else{
+            document.write("No tenemos registro de esa figura")
+        }
+    </script>
+
+
+
+</body>
+
+</html>

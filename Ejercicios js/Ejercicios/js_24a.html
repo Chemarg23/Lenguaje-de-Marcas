@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <h1>Ejemplo js</h1>
+    <script>
+
+let month, anio;
+month = prompt("Introduzca el mes");
+anio = prompt("Introduzca el año");
+
+document.write(`Su mes tiene ${diaMes(parseInt(month), parseInt(anio))} dias`)
+
+function diaMes(mes, anio){
+
+if (isNaN(mes) || isNaN(anio) || parseInt(mes) != mes || parseInt(anio) != anio) {
+    throw new Error('Ambos argumentos deben ser números enteros.');
+  }
+
+ 
+  if (mes < 1 || mes > 12) {
+    throw new Error('El mes debe estar dentro del rango 1-12.');
+  }
+
+  if (mes === 2) {
+    if ((anio % 4 === 0 && anio % 100 !== 0) || anio % 400 === 0) {
+      return 29;
+    } else {
+      return 28;
+    }
+  }
+
+  if ([4, 6, 9, 11].indexOf(mes) !== -1) {
+    return 30;
+  }
+  return 31;
+}
+
+
+
+
+
+       
+
+
+    </script>
+
+
+
+</body>
+
+</html>

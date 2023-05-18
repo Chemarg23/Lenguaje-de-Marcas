@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <h1>Ejemplo js</h1>
+    <script>
+        let nombre, curso, pregunta;
+
+        nombre = prompt("Teclea tu nombre: ", "Sonia");
+        curso = prompt("Teclee su curso");
+        pregunta = confirm("¿Te quieres registrar con el usuario?");
+
+        if (pregunta && curso === "ASIR") {
+            document.write(`${nombre} vas a trabajar como administrador`)
+        } else if (pregunta && curso === "DAM") {
+            document.write(`${nombre} vas a trabajar como desarrollador de videojuegos`)
+        } else if (pregunta && curso === "SMR") {
+            document.write(`${nombre} vas a Estudiar ASIR o DAM`)
+        } else {
+            document.write(`¿${nombre} que haces aqui?`)
+        }
+    </script>
+
+
+
+</body>
+
+</html>

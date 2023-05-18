@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div">
+        <img src="" onmouseover="" alt="">
+    </div>
+    <button onclick="change()">Perro</button>
+    <button onclick="change2()">Francia</button>
+    <script>
+        function change(){
+            document.getElementById("div").innerHTML='<img src="img/perro.jpg" onmouseover="change2()"">'
+        }
+        function change2(){
+            document.getElementById("div").innerHTML='<img src="img/francia.png" alt="" onmouseover="change()">'
+        }
+    </script>
+</body>
+</html>
